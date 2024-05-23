@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useState }  from "react";
 import { 
     Text,
     View,
@@ -7,10 +7,13 @@ import {
     FlatList
 } from "react-native";
 import { Feather } from "@expo/vector-icons"; // npm i @expo/vector-icons
-import ChatComponent from "../component/ChatComponent";
+import ChatComponent from "../components/ChatComponent";
 import { styles } from "../utils/style";
+import Modal from "../components/Modal";
 
 const Chat = () => {
+    const [visible, setVisible] = useState(false);
+
     const rooms = [
         {
             id: "1",
@@ -55,13 +58,15 @@ const Chat = () => {
             ],
         },
     ];
+
     return (
         <SafeAreaView style={styles.chatscreen}>
             <View style={styles.chattopContainer}>
                 <View style={styles.chatheader}>
                     <Text style={styles.chatheading}>Chats</Text>
 
-                    <Pressable onPress={() => console.log("Button Pressed")}>
+                    {/* Affiche le composant modal lorsqu'on clique */}
+                    <Pressable onPress={() => setVisible(true)}>
                         <Feather name="edit" size={24} color='green' />
                     </Pressable>
                 </View>
@@ -81,6 +86,9 @@ const Chat = () => {
                     </View>
                 )}
             </View>
+
+            {/* On passe setVisible comme props afin d'affiche le composant */}
+            {visible ? <Modal setVisible={setVisible} /> : ""}
         </SafeAreaView>
     );
 };
