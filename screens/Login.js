@@ -9,10 +9,21 @@ import {
 } from "react-native";
 
 import { styles } from "../utils/style";
+/**
+ * AsyncStorage est un système de stockage clé-valeur non chiffré, asynchrone, persistant et global pour l'application. Il doit être utilisé à la place de LocalStorage.
+ * Il est recommandé d'utiliser une abstraction au-dessus d'AsyncStorage au lieu d'AsyncStorage directement pour autre chose qu'une utilisation légère, car elle fonctionne globalement.
+ * Sur iOS, AsyncStorage s'appuie sur un code natif qui stocke les petites valeurs dans un dictionnaire sérialisé et les valeurs plus grandes dans des fichiers séparés. Sur Android, AsyncStorage utilisera RocksDB ou SQLite en fonction de ce qui est disponible.
+ * Le code JavaScript d'AsyncStorage est une façade qui fournit une API JavaScript claire, de vrais objets Error et des fonctions non multifonctions. Chaque méthode de l'API renvoie un objet Promise.
+ */
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
-    // useState est un React Hook qui vous permet d'ajouter une variable d'état à votre composant.
+    /**
+     *  useState est un React Hook qui vous permet d'ajouter une variable d'état à votre composant
+     * React. Ce hook prend en paramètre : une valeur initiale ou une fonction renvoyant une valeur
+     * initiale. Celui-ci retourne en échange : un tableau avec la valeur courante du “state” ainsi
+     * qu'une fonction pour la mettre à jour
+     */
     const [username, setUsername] = useState("");
 
     const storeUsername = async () => {

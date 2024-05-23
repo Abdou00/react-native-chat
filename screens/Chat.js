@@ -87,7 +87,7 @@ const Chat = () => {
                 )}
             </View>
 
-            {/* On passe setVisible comme props afin d'affiche le composant */}
+            {/* On passe l'attribut setVisible comme props afin de basculer l'affichage dans le composant modal. */}
             {visible ? <Modal setVisible={setVisible} /> : ""}
         </SafeAreaView>
     );

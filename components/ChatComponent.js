@@ -8,12 +8,25 @@ const ChatComponent = ({ item }) => {
     const navigation = useNavigation();
     const [messages, setMessages] = useState({});
 
-    //👇🏻 Retrieves the last message in the array from the item prop
+    //👇🏻 Récupère le dernier message du tableau à partir du prop item
+    /**
+     * useLayoutEffect s'exécute de manière synchrone immédiatement après que React ait effectué toutes
+     * les mutations DOM. Cela peut être utile si vous devez effectuer des mesures DOM (comme obtenir la
+     * position de défilement ou d'autres styles pour un élément), puis effectuer des mutations DOM ou
+     * déclencher un nouveau rendu synchrone en mettant à jour l'état.
+     * 
+     * Si votre effet mute le DOM (via une référence de nœud DOM) et que la mutation DOM
+     * modifiera l'apparence du nœud DOM entre le moment où il est rendu et celui où votre effet le
+     * mute, alors vous ne souhaitez pas utiliser useEffect. Vous souhaiterez utiliser useLayoutEffect.
+     * Sinon, l'utilisateur pourrait voir un scintillement lorsque vos mutations DOM prennent effet.
+     * C'est à peu près la seule fois où vous souhaitez éviter useEffect et utiliser useLayoutEffect à
+     * la place.
+     */
     useLayoutEffect(() => {
         setMessages(item.messages[item.messages.length - 1]);
     }, []);
 
-    ///👇🏻 Navigates to the Messaging screen
+    ///👇🏻 Permet d'accéder à l'écran de messagerie
     const handleNavigation = () => {
         navigation.navigate("Messaging", {
             id: item.id,
